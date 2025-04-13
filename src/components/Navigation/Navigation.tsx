@@ -32,9 +32,9 @@ const Navigation = () => {
                   <CaretUp className="size-3.5 fill-grey-600 rotate-180 transition-all duration-250 group-hover:fill-black group-hover:rotate-360"  />
                 </span>
               )}
-              {/* {link.dropdown && (
+              {link.dropdown && (
                 <DestopkDropdown links={link.dropdownLinks} />
-              )} */}
+              )}
             </li>
           ))}
         </ul>
