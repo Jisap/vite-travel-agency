@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import Star from "../Icons/Star";
 
 
@@ -10,10 +11,15 @@ interface RatingProps {
 
 const Rating = ({ name, rating, img, className }: RatingProps) => {
   return (
-    <div className={`
-      absolute flex gap-x-2.5 rounded-xl bg-white/85 py-3.5 pr-5 pl-3 drop-shadow-[0_4px_30px_rgba(0,0,0,0.12)] backdrop-blur-3xl max-xl:py-2.5 max-sm:pr-6 max-sm:pl-2
-      ${className}
-      `}
+    <motion.div 
+      initial={{ opacity: 0, y: 100, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className={`
+        absolute flex gap-x-2.5 rounded-xl bg-white/85 py-3.5 pr-5 pl-3 drop-shadow-[0_4px_30px_rgba(0,0,0,0.12)] backdrop-blur-3xl max-xl:py-2.5 max-sm:pr-6 max-sm:pl-2
+        ${className}
+        `}
     >
       <div className="bg-grey-300 size-17 max-3xl:size-16 max-2xl:size-14 max-xl:size-13 max-sm:size-10 flex items-end justify-center overflow-hidden rounded-full">
         <img 
@@ -35,7 +41,7 @@ const Rating = ({ name, rating, img, className }: RatingProps) => {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
