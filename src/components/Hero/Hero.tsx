@@ -19,7 +19,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* render inside image on desktop */}
+        {/* render inside image on desktop - visible > 1280*/}
         <ul className="mx-21.5 max-3xl:mx-16 max-2xl:mx-9 flex gap-x-18 max-3xl:gap-x-16 max-2xl:gap-x-12 max-xl:hidden px-16 py-18 max-3xl:py-16 max-3xl:px-14 max-2xl:px-10.5 max-2xl:py-12
          bg-white drop-shadow-[0_2px_40px_rgba(0,0,0,0.06)] absolute -bottom-23 rounded-[1.5rem] "
         >
@@ -29,8 +29,10 @@ const Hero = () => {
         </ul>
       </div>
 
-      {/* render below image on tablet and mobile  */}
-      <ul className="mt-26 hidden rounded-[1.5rem] bg-white px-4 max-2xl:gap-x-12 max-xl:static max-xl:mx-0 max-xl:flex max-xl:gap-x-16 max-lg:mt-24 max-lg:px-0 max-md:flex-wrap max-md:justify-center max-md:gap-x-8 max-md:gap-y-16">
+      {/* render below image on tablet and mobile - visible < 1280 */}
+      <ul className="mt-26 hidden rounded-[1.5rem] bg-white px-4 max-2xl:gap-x-12 max-xl:static max-xl:mx-0 max-xl:flex max-xl:gap-x-16 max-lg:mt-24 max-lg:px-0 
+      max-md:flex-wrap max-md:justify-center max-md:gap-x-8 max-md:gap-y-16"
+      >
         {heroBenefits.map((benefit) => (
           <HeroBenefit benefit={benefit} key={benefit.id} />
         ))}
