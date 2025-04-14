@@ -58,8 +58,20 @@ const Steps = () => {
               alt="swimmingDudes"
               className="max-h-[50.8rem] rounded-[3.5rem] max-2xl:max-h-180 max-xl:rounded-[2.5rem] max-lg:max-w-lg max-lg:rounded-[2rem] max-md:max-w-[100%] max-md:rounded-3xl"
             />
-            <Rating />
-            <Rating />
+            <Rating 
+              key={1}
+              name="Tiffany Miller"
+              rating={4.6}
+              img="/headshots/tiffany.webp"
+              className="max-3xl:top-24.5 absolute top-28 left-0 max-md:top-24 max-sm:hidden"
+            />
+            <Rating 
+              key={2}
+              name="Amari Reece"
+              rating={4.9}
+              img="/headshots/amari.webp"
+              className="max-3xl:bottom-24.5 absolute right-0 bottom-28 max-md:bottom-24 max-sm:hidden"
+            />
           </figure>
         </div>
       </div>
