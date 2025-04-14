@@ -8,7 +8,7 @@ interface HeroBenefitProps {
 const HeroBenefit = ({ benefit }: HeroBenefitProps) => {
   return (
     <li key={benefit.id} className="flex items-center gap-x-12">
-      <div className="bg-primary-100 flex size-24 items-center justify-center rounded-full">
+      <div className="bg-primary-100 flex size-24 items-center justify-center rounded-full shrink-0">
         <benefit.Icon className="fill-primary-700"/>
       </div>
 
