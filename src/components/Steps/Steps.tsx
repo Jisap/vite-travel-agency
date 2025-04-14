@@ -4,7 +4,7 @@ import Rating from "./Rating"
 
 const Steps = () => {
   return (
-    <section className="px-24 py-36">
+    <section className="px-24 max-3xl:px-20 max-2xl:px-14 max-xl:px-10 max-lg:px-6 max-sm:px-4 py-36 max-3xl:py-34 max-2xl:py-28 max-xl:py-26 max-lg:py-24">
       <div className="m-auto max-w-432 px-21.5">
         <div className="mt-4 text-center">
           <h2 className="tracking-6 mb-5 text-[3.25rem] font-semibold">
@@ -40,10 +40,11 @@ const Steps = () => {
             </a>
           </div>
 
-          <figure>
+          <figure className="relative shrink-2 px-20">
             <img 
               src={swimmingDudes}
               alt="swimmingDudes"
+              className="max-h-[50.8rem] rounded-[3.5rem]"
             />
             <Rating />
             <Rating />
