@@ -1,4 +1,6 @@
+import { motion } from "motion/react"
 import { type BlogPost } from "../../utils/contentTypes"
+import { useState } from "react"
 
 
 interface BlogPostProps {
@@ -6,13 +8,24 @@ interface BlogPostProps {
 }
 
 const BlogPost = ({ post }: BlogPostProps) => {
+
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false)
+
   return (
-    <li className="group flex cursor-pointer items-center justify-between gap-x-36">
+    <motion.li 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ 
+        opacity: imageLoaded ? 1 : 0,
+        y: imageLoaded ? 0 : 20,
+      }}
+      className="group flex cursor-pointer items-center justify-between gap-x-36"
+    >
       <div className="overflow-hidden rounded-[1.5rem]">
         <img 
           src={post.img}
           alt={post.alt}
           className="max-h-108 transform rounded-[1.3rem] transition-all duration-300 ease-in-out group-hover:scale-103"
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
       <div className="mr-11 max-w-195">
@@ -30,7 +43,7 @@ const BlogPost = ({ post }: BlogPostProps) => {
           View More
         </button>
       </div>
-    </li>
+    </motion.li>
   )
 }
 
