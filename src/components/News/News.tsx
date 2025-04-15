@@ -9,7 +9,7 @@ const News = () => {
           Latest news from us
         </h2>
 
-        <ul >
+        <ul className='flex flex-col gap-y-34'>
           {blogPosts.map((post) => (
             <BlogPost 
               key={post.id}
