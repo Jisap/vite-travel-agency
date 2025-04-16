@@ -31,7 +31,7 @@ const ExploreMore = () => {
           </div>
         </div>
 
-        <ul className="mt-33 grid grid-cols-3 gap-x-29gap-y-24">
+        <ul className="mt-33 grid grid-cols-3 gap-x-29 gap-y-24">
           {locations.slice(0,6).map((location) => (
             <LocationCard 
               location={location} 
