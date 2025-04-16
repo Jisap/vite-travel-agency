@@ -37,6 +37,7 @@ const ExploreMore = () => {
             <button 
               className="bg-grey-300 not-disabled:hover:bg-grey-400 flex size-18 cursor-pointer place-content-center rounded-full
               transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+              aria-label="arrow-left"
               onClick={handleLeftClick}
               disabled={currentIndex === 0}
             >
@@ -45,6 +46,7 @@ const ExploreMore = () => {
             <button 
               className="bg-primary-700 not-disabled:hover:bg-primary-800 flex size-18 cursor-pointer place-content-center rounded-full
               transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+              aria-label="arrow-right"
               onClick={handleRightClick}  
               disabled={currentIndex >= totalLocations - 6}
             >

@@ -30,7 +30,9 @@ const LocationCard = ({location}: LocationCardProps) => {
           </div>
         </div>
 
-        <p>{location.pricePerPerson}/<span>Pax</span></p>
+        <p className="font-rubik text-[1.75rem]">
+          ${location.pricePerPerson}/<span className="text-[1.25rem]">Pax</span>
+        </p>
       </div>
     </li>
   )
