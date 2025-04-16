@@ -1,3 +1,4 @@
+import { motion } from "motion/react"
 import { type Location } from "../../utils/contentTypes"
 import { Location as LocationIcon } from "../Icons/Location"
 import Star from "../Icons/Star"
@@ -8,7 +9,12 @@ interface LocationCardProps {
 
 const LocationCard = ({location}: LocationCardProps) => {
   return (
-    <li className="group cursor-pointer">
+    <motion.li 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className="group cursor-pointer">
       <div className="relative mb-8 overflow-hidden rounded-3xl">
         <img 
           src={location.img} 
@@ -34,7 +40,7 @@ const LocationCard = ({location}: LocationCardProps) => {
           ${location.pricePerPerson}/<span className="text-[1.25rem]">Pax</span>
         </p>
       </div>
-    </li>
+    </motion.li>
   )
 }
 
