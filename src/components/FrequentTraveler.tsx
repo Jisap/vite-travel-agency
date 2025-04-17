@@ -1,7 +1,20 @@
+import { MouseEvent, useState } from "react"
 import Checkmark from "./Icons/Checkmark"
 
 
 const FrequentTraveler = () => {
+
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if(isChecked){
+      console.log("Form submitted");
+    }
+  }
+
+  
+
   return (
     <section className="bg-primary-100 px-24 py-36">
       <div className="border-y-grey-500/40 m-auto flex max-w-389 items-center justify-between gap-x-28 border-y-1 py-26">
@@ -51,15 +64,30 @@ const FrequentTraveler = () => {
             />
           </label>
 
-          <div>
-            <label>
-              <button>
-                <Checkmark className="size-2" />
+          <div className="flex flex-wrap items-center justify-between gap-8">
+            <label className="text-grey-800 flex cursor-pointer items-center gap-x-1.5">
+              <button 
+                className="flex size-5 cursor-pointer items-center justify-center rounded-xs bg-white p-1 disabled:opacity-50"
+                type="button"
+                onClick={() => setIsChecked(!isChecked)}  
+              >
+                <Checkmark 
+                  className={`
+                    size-2 transition-all duration-200 
+                    ${isChecked ? "visible size-3 opacity-100" : "invisible size-2 opacity-0"}
+                  `} 
+                  />
               </button>
-              <p> Agree to receive promotional email updates</p>
+              <p className="text-sm tranking-[.03rem]"> Agree to receive promotional email updates</p>
             </label>
 
-            <button>Learn More</button>
+            <button 
+              className="bg-primary-700 hover:bg-primary-800 cursor-pointer rounded-[0.625rem] px-8 py-3.5 font-medium text-white
+              transition-all duration-200 disabled:cursor-not-allowed"
+              onClick={handleSubmit}
+            >
+              Learn More
+            </button>
           </div>
         </form>
       </div>
