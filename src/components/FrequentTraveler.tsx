@@ -20,7 +20,7 @@ const FrequentTraveler = () => {
 
         <form className="flex flex-col basis-150">
           <label className="mb-8">
-            <p className="tracking-6 mb-3 text-lg/9.5">
+            <p className="tracking-6 mb-3 text-lg/9.5 font-semibold">
               Full Name
             </p>
             <input 
@@ -35,9 +35,20 @@ const FrequentTraveler = () => {
             />
           </label>
 
-          <label>
-            <p>Email</p>
-            <input type="email" />
+          <label className="mb-12">
+            <p className="tracking-6 mb-3 text-lg/9.5 font-semibold">
+              Email
+            </p>
+            <input 
+              type="email" 
+              required
+              name="emailAddress"
+              minLength={3}
+              maxLength={50}
+              placeholder="john@doe.com"
+              className="placeholder:text-grey-400 w-full rounded-lg bg-white py-3.5 pl-4 
+              transition-all duration-200 placeholder:font-light focus:outline-1 disabled:opacity-50"
+            />
           </label>
 
           <div>
