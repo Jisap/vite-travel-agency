@@ -5,6 +5,7 @@ import Checkmark from "./Icons/Checkmark"
 const FrequentTraveler = () => {
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  
 
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
