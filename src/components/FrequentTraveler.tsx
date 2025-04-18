@@ -3,8 +3,24 @@ import Checkmark from "./Icons/Checkmark"
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import { motion, AnimatePresence } from "motion/react";
 
+interface FormState {
+  currentState : "idle" | "pending" | "success" | "error";
+  errorMessage : string | null;
+}
+
+const buttonStateClasses = {
+  idle: "bg-primary-700 opacity-100",
+  pending: "bg-primary-700 opacity-50",
+  success: "bg-green opacity-100",
+  error: "bg-red opacity-100",
+}
 
 const FrequentTraveler = () => {
+
+  const [formState, setFormState] = useState<FormState>({
+    currentState: "success",
+    errorMessage: null,
+  })
 
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation({
     fullName: "",
@@ -17,7 +33,14 @@ const FrequentTraveler = () => {
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if(isChecked && isValid) {
+      
+      setFormState({
+        currentState: "idle",
+        errorMessage: null,
+      })
+
       console.log("Form submitted");
+
       resetForm();
     }
   }
@@ -130,12 +153,16 @@ const FrequentTraveler = () => {
             </label>
 
             <button 
-              className="bg-primary-700 hover:bg-primary-800 cursor-pointer rounded-[0.625rem] px-8 py-3.5 font-medium text-white
+              className={`hover:bg-primary-800 cursor-pointer rounded-[0.625rem] px-8 py-3.5 font-medium text-white
               transition-all duration-200 disabled:cursor-not-allowed
-              max-xl:py-3 max-xl:text-sm max-xl:font-normal max-lg:py-3.5 max-lg:text-base"
+              max-xl:py-3 max-xl:text-sm max-xl:font-normal max-lg:py-3.5 max-lg:text-base
+              ${buttonStateClasses[formState.currentState]}`}
               onClick={handleSubmit}
             >
-              Learn More
+              {formState.currentState === "idle" && "Learn More"}
+              {formState.currentState === "pending" && "Submitting..."}
+              {formState.currentState === "success" && "Success!"}
+              {formState.currentState === "error" && "Submission Failed"}
             </button>
           </div>
         </form>
