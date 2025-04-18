@@ -18,7 +18,7 @@ const buttonStateClasses = {
 const FrequentTraveler = () => {
 
   const [formState, setFormState] = useState<FormState>({
-    currentState: "success",
+    currentState: "idle",
     errorMessage: null,
   })
 
@@ -35,9 +35,16 @@ const FrequentTraveler = () => {
     if(isChecked && isValid) {
       
       setFormState({
-        currentState: "idle",
+        currentState: "success",
         errorMessage: null,
       })
+
+      setTimeout(() => {
+        setFormState({
+          currentState: "idle",
+          errorMessage: null,
+        })
+      }, 2000)
 
       console.log("Form submitted");
 
