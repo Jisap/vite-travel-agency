@@ -153,11 +153,12 @@ const FrequentTraveler = () => {
             </label>
 
             <button 
-              className={`hover:bg-primary-800 cursor-pointer rounded-[0.625rem] px-8 py-3.5 font-medium text-white
+              className={`enabled:hover:bg-primary-800 cursor-pointer rounded-[0.625rem] px-8 py-3.5 font-medium text-white
               transition-all duration-200 disabled:cursor-not-allowed
               max-xl:py-3 max-xl:text-sm max-xl:font-normal max-lg:py-3.5 max-lg:text-base
               ${buttonStateClasses[formState.currentState]}`}
               onClick={handleSubmit}
+              disabled={formState.currentState !== "idle"}
             >
               {formState.currentState === "idle" && "Learn More"}
               {formState.currentState === "pending" && "Submitting..."}
