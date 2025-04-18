@@ -1,20 +1,27 @@
 import { MouseEvent, useState } from "react"
 import Checkmark from "./Icons/Checkmark"
+import { useFormAndValidation } from "../hooks/useFormAndValidation";
+import { motion, AnimatePresence } from "motion/react";
 
 
 const FrequentTraveler = () => {
+
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation({
+    fullName: "",
+    emailAddress: "",
+  });
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
   
 
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if(isChecked){
+    if(isChecked && isValid) {
       console.log("Form submitted");
+      resetForm();
     }
   }
 
-  
   return (
     <section className="bg-primary-100 px-24 py-36
       max-3xl:px-20 max-3xl:py-34 max-2xl:px-14 max-2xl:py-28 max-xl:px-10 max-xl:py-26 max-lg:px-6 max-sm:px-4
@@ -47,13 +54,29 @@ const FrequentTraveler = () => {
               type="text" 
               required
               name="fullName"
+              value={values.fullName}
+              onChange={handleChange}
               minLength={2}
               maxLength={50}
               placeholder="John Doe"
-              className="placeholder:text-grey-400 w-full rounded-lg bg-white py-3.5 pl-4 
+              className={`placeholder:text-grey-400 w-full rounded-lg bg-white py-3.5 pl-4 
               transition-all duration-200 placeholder:font-light focus:outline-1 disabled:opacity-50
-              max-sm:py-4 max-sm:text-sm"
+              max-sm:py-4 max-sm:text-sm ${errors.fullName && "outline-red" 
+              }`}
             />
+            <AnimatePresence>
+              {errors.fullName && (
+                <motion.p 
+                  className="text-red-500 text-xs pt-1 pl-0.5"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {errors.fullName}
+                </motion.p>
+              )}
+            </AnimatePresence>
           </label>
 
           <label className="mb-12 max-3xl:mb-11.5 max-md:mb-16">
@@ -64,13 +87,29 @@ const FrequentTraveler = () => {
               type="email" 
               required
               name="emailAddress"
+              value={values.emailAddress}
+              onChange={handleChange}
               minLength={3}
               maxLength={50}
               placeholder="john@doe.com"
-              className="placeholder:text-grey-400 w-full rounded-lg bg-white py-3.5 pl-4 
+              className={`placeholder:text-grey-400 w-full rounded-lg bg-white py-3.5 pl-4 
               transition-all duration-200 placeholder:font-light focus:outline-1 disabled:opacity-50
-              max-sm:py-4 max-sm:text-sm"
+              max-sm:py-4 max-sm:text-sm ${errors.emailAddress && "outline-red" 
+              }`}
             />
+            <AnimatePresence>
+              {errors.emailAddress && (
+                <motion.p
+                  className="text-red-500 text-xs pt-1 pl-0.5"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {errors.emailAddress}
+                </motion.p>
+              )}
+            </AnimatePresence>
           </label>
 
           <div className="flex flex-wrap items-center justify-between gap-8">
