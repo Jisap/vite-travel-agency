@@ -1,7 +1,12 @@
-import { blogPosts } from '../../utils/content'
+import useQueryBlogPosts from '../../hooks/useQueryBlogPosts'
+import Error from '../Error'
+//import { blogPosts } from '../../utils/content'
 import BlogPost from './BlogPost'
 
 const News = () => {
+
+  const { blogPosts, error, isLoading } = useQueryBlogPosts()
+
   return (
     <section className='px-24 py-36
       max-3xl:py-34 max-3xl:px-20
@@ -20,19 +25,29 @@ const News = () => {
           Latest news from us
         </h2>
 
-        <ul className='flex flex-col gap-y-34
-          max-3xl:gap-y-32 max-2xl:gap-y-26 
-          max-xl:gap-y-18 
-          max-lg:items-center 
-          max-sm:gap-y-24
-        '>
-          {blogPosts.map((post) => (
-            <BlogPost 
-              key={post.id}
-              post={post} 
-            />
-          ))}
-        </ul>
+        {/* success state */}
+        {!isLoading && !error && (
+          <ul className='flex flex-col gap-y-34
+            max-3xl:gap-y-32 max-2xl:gap-y-26 
+            max-xl:gap-y-18 
+            max-lg:items-center 
+            max-sm:gap-y-24
+          '>
+            {blogPosts?.map((post) => (
+              <BlogPost 
+                key={post.id}
+                post={post} 
+              />
+            ))}
+          </ul>
+        )}
+
+        {/* error state */}
+        {!isLoading && error && (
+          <Error>
+            It looks like something went wrong while loading our recent news.
+          </Error>
+        )}
       </div>
     </section>
   )

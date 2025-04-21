@@ -11,7 +11,7 @@ const supabasekey = import.meta.env.VITE_SUPABASE_API_KEY;
 const supabase = createClient<Database>(supabaseUrl, supabasekey);
 
 export async function getBlogPosts(){
-  const { data, error } = await supabase.from ("BlogPosts").select()
+  const { data, error } = await supabase.from ("BlogPosts").select();
 
   if(error){
     throw new Error(`Error: Database returned error when fetching blog posts: ${error.message}`)

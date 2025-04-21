@@ -1,6 +1,7 @@
 import { motion } from "motion/react"
 import { type BlogPost } from "../../utils/contentTypes"
 import { useState } from "react"
+import formatDate from '../../utils/formatDate';
 
 
 interface BlogPostProps {
@@ -40,7 +41,7 @@ const BlogPost = ({ post }: BlogPostProps) => {
           max-xl:mb-3.5 
           max-md:mb-4.5"
         >
-          {post.date}
+          {formatDate(post.date)}
         </p>
         <h4 className="tracking-6 mb-6 text-[2.75rem] font-medium
           max-3xl:text-[2.5rem] max-3xl:mb-5.5
