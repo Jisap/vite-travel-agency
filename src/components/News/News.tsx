@@ -1,5 +1,6 @@
 import useQueryBlogPosts from '../../hooks/useQueryBlogPosts'
 import Error from '../Error'
+import Loader from '../Loader'
 //import { blogPosts } from '../../utils/content'
 import BlogPost from './BlogPost'
 
@@ -24,6 +25,8 @@ const News = () => {
         '>
           Latest news from us
         </h2>
+
+        {isLoading && !error && <Loader />}
 
         {/* success state */}
         {!isLoading && !error && (
