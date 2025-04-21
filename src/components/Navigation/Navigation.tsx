@@ -27,11 +27,13 @@ const Navigation = () => {
               >
                 {link.text}
               </a>
+
               {link.dropdown && (
                 <span className="flex size-6 items-center justify-center">
                   <CaretUp className="size-3.5 fill-grey-600 rotate-180 transition-all duration-250 group-hover:fill-black group-hover:rotate-360"  />
                 </span>
               )}
+              
               {link.dropdown && (
                 <DestopkDropdown links={link.dropdownLinks} />
               )}

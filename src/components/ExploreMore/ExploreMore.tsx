@@ -21,7 +21,9 @@ const ExploreMore = () => {
   }
 
   return (
-    <section className="px-24 py-26
+    <section 
+      id="ExploreMore"
+      className="px-24 py-26
       max-3xl:px-20 max-2xl:px-14 max-xl:px-10 max-lg:px-6 max-lg:py-24 max-sm:px-4"
     >
       {/* En pantallas de 800px o menos (≤ 50rem), el elemento tendrá un ancho máximo de 32rem (512px)*/}
