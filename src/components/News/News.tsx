@@ -26,6 +26,7 @@ const News = () => {
           Latest news from us
         </h2>
 
+        {/* loading state */}
         {isLoading && !error && <Loader />}
 
         {/* success state */}
