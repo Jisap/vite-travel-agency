@@ -1,7 +1,7 @@
 
 
 import { createClient } from "@supabase/supabase-js";
-import { BlogPost, Location } from "../utils/contentTypes";
+import { BlogPost, Lead, Location } from "../utils/contentTypes";
 import { Database } from "./Database";
 
 const supabaseUrl = "https://efbqxmvhcmcmhcwytkow.supabase.co";
@@ -51,4 +51,20 @@ export async function getLocations() {
   })
 
   return locations
+}
+
+export async function insertLead(lead: Lead){
+  const { error } = await supabase.from("Leads").insert([ // Inserta una nueva fila en la tabla Leads
+    {
+      created_at: lead.createdAt,
+      full_name: lead.fullName,
+      email_address: lead.emailAddress,
+    },
+  ]);
+
+  if (error) {
+    throw new Error(`Error: Database returned error when inserting lead: ${error.message}`);
+  }
+
+
 }

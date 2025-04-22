@@ -2,6 +2,8 @@ import { MouseEvent, useState } from "react"
 import Checkmark from "./Icons/Checkmark"
 import { useFormAndValidation } from "../hooks/useFormAndValidation";
 import { motion, AnimatePresence } from "motion/react";
+import useInsertLead from "../hooks/useInsertLead";
+import { FORM_STATE_DURATION } from "../utils/constants";
 
 interface FormState {
   currentState : "idle" | "pending" | "success" | "error";
@@ -28,29 +30,55 @@ const FrequentTraveler = () => {
   });
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  
 
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleSuccess = () => {
+    resetForm();
+    setIsChecked(false);
+    setFormState({
+      currentState: "success",
+      errorMessage: null,
+    });
+
+    setTimeout(
+      () => setFormState({ currentState: "idle", errorMessage: null }),
+      FORM_STATE_DURATION,
+    );
+  };
+
+  const handleError = (error: Error) => {
+    setFormState({
+      currentState: "error",
+      errorMessage: error.message,
+    });
+
+    setTimeout(
+      () => setFormState({ currentState: "idle", errorMessage: null }),
+      FORM_STATE_DURATION,
+    );
+  };
+
+  const mutation = useInsertLead({
+    onSuccess: handleSuccess,
+    onError: handleError,
+  })
+
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => { // mutation -> hook -> api
     e.preventDefault();
-    if(isChecked && isValid) {
-      
+    if (isChecked && isValid) {
+
       setFormState({
-        currentState: "success",
+        currentState: "pending",
         errorMessage: null,
       })
 
-      setTimeout(() => {
-        setFormState({
-          currentState: "idle",
-          errorMessage: null,
-        })
-      }, 2000)
-
-      console.log("Form submitted");
-
-      resetForm();
+      mutation.mutate({
+        createdAt: Date.now(),
+        fullName: values.fullName,
+        emailAddress: values.emailAddress,
+      })
     }
   }
+
 
   return (
     <section className="bg-primary-100 px-24 py-36
@@ -88,6 +116,7 @@ const FrequentTraveler = () => {
               onChange={handleChange}
               minLength={2}
               maxLength={50}
+              disabled={formState.currentState !== "idle"}
               placeholder="John Doe"
               className={`placeholder:text-grey-400 w-full rounded-lg bg-white py-3.5 pl-4 
               transition-all duration-200 placeholder:font-light focus:outline-1 disabled:opacity-50
@@ -121,6 +150,7 @@ const FrequentTraveler = () => {
               onChange={handleChange}
               minLength={3}
               maxLength={50}
+              disabled={formState.currentState !== "idle"}
               placeholder="john@doe.com"
               className={`placeholder:text-grey-400 w-full rounded-lg bg-white py-3.5 pl-4 
               transition-all duration-200 placeholder:font-light focus:outline-1 disabled:opacity-50
