@@ -1,14 +1,20 @@
 import { useState } from "react"
-import { locations } from "../../utils/content"
+//import { locations } from "../../utils/content"
 import CaretUp from "../Icons/CaretUp"
 import LocationCard from "./LocationCard"
 import { LOCATION_CARD_SHOW } from "../../utils/constants"
+import useQueryLocations from "../../hooks/useQueryLocations"
+import Loader from "../Loader"
+import Error from "../Error"
 
 
 const ExploreMore = () => {
 
+  const { locations, error, isLoading } = useQueryLocations();
+
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const totalLocations = locations?.length || 0;
+
 
   const renderLocations = locations?.slice(currentIndex, currentIndex + LOCATION_CARD_SHOW)
 
@@ -66,19 +72,31 @@ const ExploreMore = () => {
           </div>
         </div>
 
-        <ul className="mt-33 grid grid-cols-3 gap-x-29 gap-y-24
-          max-3xl:mt-31 max-2xl:mt-24 max-xl:mt-20 max-md:mt-16
-          max-3xl:gap-x-26 max-2xl:gap-x-16 max-xl:gap-x-22 max-lg:gap-x-12
-          max-2xl:gap-y-20 max-sm:gap-y-16
-          max-mdlg:grid-cols-1 max-xl:grid-cols-2   "
-        >
-          {renderLocations?.map((location) => (
-            <LocationCard 
-              location={location} 
-              key={location.id} 
-            />
-          ))}
-        </ul>
+        {isLoading && !error && (
+          <Loader />
+        )}
+
+        {!isLoading && !error && ( 
+          <ul className="mt-33 grid grid-cols-3 gap-x-29 gap-y-24
+            max-3xl:mt-31 max-2xl:mt-24 max-xl:mt-20 max-md:mt-16
+            max-3xl:gap-x-26 max-2xl:gap-x-16 max-xl:gap-x-22 max-lg:gap-x-12
+            max-2xl:gap-y-20 max-sm:gap-y-16
+            max-mdlg:grid-cols-1 max-xl:grid-cols-2   "
+          >
+            {renderLocations?.map((location) => (
+              <LocationCard 
+                location={location} 
+                key={location.id} 
+              />
+            ))}
+          </ul>
+        )}
+
+        {!isLoading && error && (
+          <Error >
+            It looks like something went wrong while loading our locations.
+          </Error>
+        )}
       </div>
     </section>
   )
