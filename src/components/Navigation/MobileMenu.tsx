@@ -1,0 +1,49 @@
+import { useState } from "react"
+import Close from "../Icons/Close"
+import { navigationLinks } from "../../utils/content"
+import CaretUp from "../Icons/CaretUp"
+import MobileDropdown from "./MobileDropdown"
+
+
+const MobileMenu = () => {
+  
+  const [activeLinkId, setActiveLinkId] = useState<number>(-1); // id del enlace actualmente expandido. -1 significa que no hay ninguno expandido.
+  
+  return (
+    <div className="fixed top-0 right-0 left-0 bottom-0 justify-end bg-white/30 pl-30">
+      <nav className="flex h-full w-full max-w-96 min-w-65 flex-col items-start gap-y-18 bg-white p-6 ol-7">
+        <Close />
+
+        <ul className="flex flex-col gap-y-8">
+          {navigationLinks.map((link) => (
+            <li 
+              key={link.id} 
+              className={
+                `group relative flex flex-col font-medium transition-all duration-300 ease-in-out 
+                ${activeLinkId === link.id ? "gap-y-6" : "gap-y-0"}
+              `}
+              onClick={() => setActiveLinkId( activeLinkId === link.id ? -1 : link.id)} // Si esta abierto lo cierra, si no lo abre ( establece el activeLinkId )
+            >
+              <div>
+                <a href={link.href}>{link.text}</a>
+                {link.dropdown && (
+                  <span>
+                    <CaretUp className="fill-grey-600 size-3.5 rotate-180 transition-all duration-200" />
+                  </span>
+                )}
+              </div>
+
+              {link.dropdown && activeLinkId === link.id && ( // Solo se renderiza el dropdown si el link esta expandido (activeLinkId === link.id)
+                <MobileDropdown links={link.dropdownLinks} />
+              )}
+            </li>
+          ))}
+        </ul>
+
+      <button>Join Now</button>
+      </nav>
+    </div>
+  )
+}
+
+export default MobileMenu

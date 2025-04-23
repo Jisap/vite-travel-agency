@@ -13,6 +13,8 @@ import Page from "./components/Page";
 import Services from "./components/Services/Services";
 import Steps from "./components/Steps/Steps";
 import Testimonials from "./components/Testimonials/Testimonials";
+import MobileMenu from "./components/Navigation/MobileMenu";
+
 
 
 const queryClient = new QueryClient({})
@@ -24,6 +26,7 @@ function App() {
         <Header>
           <Navigation />
           <Hero />
+          <MobileMenu />
         </Header>
 
         <Main>
