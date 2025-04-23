@@ -3,19 +3,50 @@ import Close from "../Icons/Close"
 import { navigationLinks } from "../../utils/content"
 import CaretUp from "../Icons/CaretUp"
 import MobileDropdown from "./MobileDropdown"
-import { AnimatePresence } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 
 
 const MobileMenu = () => {
   
   const [activeLinkId, setActiveLinkId] = useState<number>(-1); // id del enlace actualmente expandido. -1 significa que no hay ninguno expandido.
   
+  const menuOpened = true;
+
+
+
   return (
-    <div className="fixed top-0 right-0 left-0 bottom-0 justify-end bg-white/30 pl-30">
-      <nav className="flex h-full w-full max-w-96 min-w-65 flex-col items-start gap-y-18 bg-white p-6 ol-7">
+    <motion.div 
+      animate={menuOpened ? "visible" : "hidden"}
+      variants={{
+        hidden: { opacity: 0, display: "none" },
+        visible: { opacity: 1, display: "flex" },
+      }}
+      className="fixed top-0 right-0 left-0 bottom-0 justify-end bg-white/30 pl-30">
+      <motion.nav 
+        animate={menuOpened ? "visible" : "hidden"}
+        variants={{
+          hidden: { opacity: 0, x: "100%" },
+          visible: { opacity: 1, x: "0%" },
+        }}
+        transition={{
+          duration: 0.35,
+          ease: "easeOut",
+        }}
+        className="flex h-full w-full max-w-96 min-w-65 flex-col items-start gap-y-18 bg-white p-6 ol-7">
         <Close />
 
-        <ul className="flex flex-col gap-y-8">
+        <motion.ul 
+          animate={menuOpened ? "visible" : "hidden"}
+          variants={{
+            hidden: { opacity: 0, x: "100%" },
+            visible: { opacity: 1, x: "0%" },
+          }}
+          transition={{
+            ease: "easeOut",
+            delay: 0.05,
+          }}
+          className="flex flex-col gap-y-8"
+        >
           {navigationLinks.map((link) => (
             <li 
               key={link.id} 
@@ -54,13 +85,13 @@ const MobileMenu = () => {
               </AnimatePresence>
             </li>
           ))}
-        </ul>
+        </motion.ul>
 
       <button className="bg-primary-700 hover:bg-primary-800 cursor-pointer rounded-[.625rem] px-8 py-3 font-medium text-white transition-all duration-200">
         Join Now
       </button>
-      </nav>
-    </div>
+      </motion.nav>
+    </motion.div>
   )
 }
 
