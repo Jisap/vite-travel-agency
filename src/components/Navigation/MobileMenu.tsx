@@ -3,6 +3,7 @@ import Close from "../Icons/Close"
 import { navigationLinks } from "../../utils/content"
 import CaretUp from "../Icons/CaretUp"
 import MobileDropdown from "./MobileDropdown"
+import { AnimatePresence } from "motion/react"
 
 
 const MobileMenu = () => {
@@ -32,6 +33,7 @@ const MobileMenu = () => {
                   {link.text}
                 </a>
 
+                
                 {link.dropdown && (
                   <span className={`
                     flex size-6  items-center justify-center transition-all duration-200
@@ -45,9 +47,11 @@ const MobileMenu = () => {
                 )}
               </div>
 
-              {link.dropdown && activeLinkId === link.id && ( // Solo se renderiza el dropdown si el link esta expandido (activeLinkId === link.id)
-                <MobileDropdown links={link.dropdownLinks} />
-              )}
+              <AnimatePresence>
+                {link.dropdown && activeLinkId === link.id && ( // Solo se renderiza el dropdown si el link esta expandido (activeLinkId === link.id)
+                  <MobileDropdown links={link.dropdownLinks} />
+                )}
+              </AnimatePresence>
             </li>
           ))}
         </ul>
