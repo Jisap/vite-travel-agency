@@ -4,13 +4,13 @@ import { navigationLinks } from "../../utils/content"
 import CaretUp from "../Icons/CaretUp"
 import MobileDropdown from "./MobileDropdown"
 import { AnimatePresence, motion } from "motion/react"
+import { useMenuContext } from "../../context/MobileContextMenu"
 
 
 const MobileMenu = () => {
   
   const [activeLinkId, setActiveLinkId] = useState<number>(-1); // id del enlace actualmente expandido. -1 significa que no hay ninguno expandido.
-  
-  const menuOpened = true;
+  const { menuOpened } = useMenuContext();
 
 
 
