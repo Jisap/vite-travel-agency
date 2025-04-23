@@ -14,6 +14,7 @@ import Services from "./components/Services/Services";
 import Steps from "./components/Steps/Steps";
 import Testimonials from "./components/Testimonials/Testimonials";
 import MobileMenu from "./components/Navigation/MobileMenu";
+import MenuContextProvider from "./context/MobileContextMenu";
 
 
 
@@ -22,24 +23,26 @@ const queryClient = new QueryClient({})
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Page>
-        <Header>
-          <Navigation />
-          <Hero />
-          <MobileMenu />
-        </Header>
+      <MenuContextProvider>
+        <Page>
+          <Header>
+            <Navigation />
+            <Hero />
+            <MobileMenu />
+          </Header>
 
-        <Main>
-          <Steps />
-          <Services />
-          <News />
-          <ExploreMore />
-          <FrequentTraveler />
-          <Testimonials />
-        </Main>
+          <Main>
+            <Steps />
+            <Services />
+            <News />
+            <ExploreMore />
+            <FrequentTraveler />
+            <Testimonials />
+          </Main>
 
-        <Footer />
-      </Page>
+          <Footer />
+        </Page>
+      </MenuContextProvider>
 
       <ReactQueryDevtools />
     </QueryClientProvider>
