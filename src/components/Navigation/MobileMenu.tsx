@@ -18,17 +18,29 @@ const MobileMenu = () => {
           {navigationLinks.map((link) => (
             <li 
               key={link.id} 
-              className={
-                `group relative flex flex-col font-medium transition-all duration-300 ease-in-out 
+              className={`
+                group relative flex flex-col font-medium transition-all duration-300 ease-in-out 
                 ${activeLinkId === link.id ? "gap-y-6" : "gap-y-0"}
               `}
               onClick={() => setActiveLinkId( activeLinkId === link.id ? -1 : link.id)} // Si esta abierto lo cierra, si no lo abre ( establece el activeLinkId )
             >
-              <div>
-                <a href={link.href}>{link.text}</a>
+              <div className="flex cursor-pointer items-center gap-x-1.75">
+                <a href={link.href} className={`
+                  text-grey-600 
+                  ${activeLinkId === link.id ? "text-grey-1000" : ""}
+                `}>
+                  {link.text}
+                </a>
+
                 {link.dropdown && (
-                  <span>
-                    <CaretUp className="fill-grey-600 size-3.5 rotate-180 transition-all duration-200" />
+                  <span className={`
+                    flex size-6  items-center justify-center transition-all duration-200
+                    ${activeLinkId === link.id ? "rotate-180" : ""}
+                  `}>
+                    <CaretUp className={`
+                      fill-grey-600 size-3.5 rotate-180 transition-all duration-200
+                      ${activeLinkId === link.id ? "fill-grey-1000" : ""}
+                    `} />
                   </span>
                 )}
               </div>
@@ -40,7 +52,9 @@ const MobileMenu = () => {
           ))}
         </ul>
 
-      <button>Join Now</button>
+      <button className="bg-primary-700 hover:bg-primary-800 cursor-pointer rounded-[.625rem] px-8 py-3 font-medium text-white transition-all duration-200">
+        Join Now
+      </button>
       </nav>
     </div>
   )
